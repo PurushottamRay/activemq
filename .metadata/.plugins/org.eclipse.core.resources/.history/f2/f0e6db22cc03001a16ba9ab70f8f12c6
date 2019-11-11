@@ -1,5 +1,0 @@
-package com.puru.activemq.config;
-
-public class PuruJMSContextConfiguration {
-
-}

@@ -1,5 +1,0 @@
-package com.puru.activemq.service;
-
-public interface PuruListenerService extends MessageListener {
-
-}
