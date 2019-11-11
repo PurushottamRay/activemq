@@ -1,0 +1,7 @@
+package com.puru.activemq.service;
+
+import javax.jms.MessageListener;
+
+interface PuruListenerService extends MessageListener {
+
+}

@@ -1,0 +1,5 @@
+package com.puru.activemq.service;
+
+public class PuruListenerService {
+
+}

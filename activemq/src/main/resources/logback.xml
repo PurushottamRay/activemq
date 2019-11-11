@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration debug="true">
+	<jmxConfigurator />
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${user.home}/logs/activemq.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<maxFileSize>250MB</maxFileSize>
+			<fileNamePattern>${user.home}/logs/activemq-%d{yyyyMMdd}-%i.log.gz</fileNamePattern>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>[%d [%t] %C{2}.%M\(\):%L %mdc %-5p]: %m%n</pattern>
+			<outputPatternAsHeader>true</outputPatternAsHeader>
+		</encoder>
+	</appender>
+
+	<appender name="ASYNC_FILE"
+		class="ch.qos.logback.classic.AsyncAppender">
+		<includeCallerData>true</includeCallerData>
+		<appender-ref ref="FILE" />
+	</appender>
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%d [%t] %C{2}.%M\(\):%L %mdc %-5p]: %m%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="ELK"
+		class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+		<destination>${logstash.host}:${logstash.port}</destination>
+		<encoder class="net.logstash.logback.encoder.LogstashEncoder">
+			<!-- <customFields>{"application":"${machine.customer}:${machine.stability}:${machine.appname}"}</customFields> -->
+			<customFields>{"application":"activemq"}</customFields>
+			<includeCallerData>true</includeCallerData>
+		</encoder>
+	</appender>
+	<root level="INFO">
+		<!-- <appender-ref ref="ASYNC_FILE" /> -->
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
