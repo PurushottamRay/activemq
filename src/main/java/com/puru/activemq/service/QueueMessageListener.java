@@ -12,10 +12,10 @@ import org.slf4j.LoggerFactory;
 /**
  * @author rayp
  */
-@Named("puruListenerService")
-public class PuruListenerService implements MessageListener {
+@Named("queueMessageListener")
+public class QueueMessageListener implements MessageListener {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PuruListenerService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(QueueMessageListener.class);
     
     public void onMessage(Message message) {
         // Check if message received is of type text message
@@ -24,6 +24,7 @@ public class PuruListenerService implements MessageListener {
             return;
         }
         try {
+            //long timeSpentInQueue = System.currentTimeMillis() - notification.getPublishedAt().getTime();
             //ActualMessageType notification = (ActualMessageType) ((ObjectMessage) message).getObject();
 
         } catch (Exception e) {
